@@ -6,11 +6,17 @@ import com.example.json_placeholder_app.domain.repository.AppRepository
 import com.example.json_placeholder_app.domain.usecase.CreateAlbumUseCase
 import com.example.json_placeholder_app.domain.usecase.CreatePostUseCase
 import com.example.json_placeholder_app.domain.usecase.GetAlbumsByUserIdUseCase
+import com.example.json_placeholder_app.domain.usecase.GetAllUsersUseCase
 import com.example.json_placeholder_app.domain.usecase.GetFeedListUseCase
 import com.example.json_placeholder_app.domain.usecase.GetPostCommentsUseCase
 import com.example.json_placeholder_app.domain.usecase.GetPostsByUserIdUseCase
+import com.example.json_placeholder_app.domain.usecase.GetUserByIdUseCase
+import com.example.json_placeholder_app.presentation.viewmodel.AlbumsOfUserViewModel
 import com.example.json_placeholder_app.presentation.viewmodel.CreatePostViewModel
+import com.example.json_placeholder_app.presentation.viewmodel.FindUsersViewModel
 import com.example.json_placeholder_app.presentation.viewmodel.HomeViewModel
+import com.example.json_placeholder_app.presentation.viewmodel.PostsOfUserViewModel
+import com.example.json_placeholder_app.presentation.viewmodel.UserProfileViewModel
 
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -52,14 +58,31 @@ val domainModule = module {
     factory {
         CreateAlbumUseCase(get())
     }
+    factory {
+        GetAllUsersUseCase(get())
+    }
+    factory {
+        GetUserByIdUseCase(get())
+    }
 }
 
 val presentationModule = module {
     viewModel {
         HomeViewModel(get())
     }
-
     viewModel {
         CreatePostViewModel(get())
+    }
+    viewModel{
+        UserProfileViewModel(get())
+    }
+    viewModel{
+        FindUsersViewModel(get())
+    }
+    viewModel{
+        AlbumsOfUserViewModel(get())
+    }
+    viewModel{
+        PostsOfUserViewModel(get())
     }
 }

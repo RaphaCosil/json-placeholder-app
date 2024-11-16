@@ -6,7 +6,7 @@ import com.example.json_placeholder_app.domain.repository.AppRepository
 class GetPostsByUserIdUseCase(
     private val repository: AppRepository
 ) {
-    suspend operator fun invoke(id: String): List<PostEntity> {
+    suspend operator fun invoke(id: Int): List<PostEntity> {
         return repository.getPostsByUserId(id)
     }
 }

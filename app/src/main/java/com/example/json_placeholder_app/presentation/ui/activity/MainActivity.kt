@@ -9,7 +9,7 @@ import com.example.json_placeholder_app.databinding.ActivityMainBinding
 import com.example.json_placeholder_app.presentation.ui.activity.fragment.CreatePostFragment
 import com.example.json_placeholder_app.presentation.ui.activity.fragment.FindUsersFragment
 import com.example.json_placeholder_app.presentation.ui.activity.fragment.HomeFragment
-import com.example.json_placeholder_app.presentation.ui.activity.fragment.MyProfileFragment
+import com.example.json_placeholder_app.presentation.ui.activity.fragment.UserProfileFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -62,9 +62,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btUserProfile.setOnClickListener {
+            val fragment = UserProfileFragment()
+            val bundle = Bundle()
+            bundle.putInt("userId", 1)
+            fragment.arguments = bundle
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                replace<MyProfileFragment>(R.id.fragment)
+                replace(R.id.fragment, fragment)
             }
             binding.btHome.setImageResource(R.drawable.icon_home_line)
             binding.btCreate.setImageResource(R.drawable.icon_create_line)

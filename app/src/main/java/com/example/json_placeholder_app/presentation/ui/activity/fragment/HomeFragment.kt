@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.FragmentHomeBinding
 import com.example.json_placeholder_app.domain.entity.FeedItemEntity
 import com.example.json_placeholder_app.presentation.ui.view.adapter.FeedListAdapter
@@ -31,17 +32,20 @@ class HomeFragment : Fragment(), OnUserInformationClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         try {
+            loading(true)
             homeViewModel.getFeedList()
             homeViewModel.feedItemList.observe(viewLifecycleOwner) {
                 Log.d("PostsViewModel", "getPosts result: $it")
                 setupRecycler(it)
+                loading(false)
             }
         } catch (e: Exception) {
             Log.e("PostsViewModel", "Error fetching todos | MESSAGE ${e.message} | CAUSE ${e.cause}")
             Toast.makeText(requireContext(), "Error fetching posts", Toast.LENGTH_SHORT).show()
+            loading(false)
         }
     }
-    private fun setupRecycler(feedList: List<FeedItemEntity>) = binding.postsRecycleView.apply {
+    private fun setupRecycler(feedList: List<FeedItemEntity>) = binding.feedRecycleView .apply {
         val feedListAdapter = FeedListAdapter(
             requireActivity(),
             feedList,
@@ -52,7 +56,23 @@ class HomeFragment : Fragment(), OnUserInformationClickListener {
         addItemDecoration(SpaceItemDecoration(48))
     }
 
+    private fun loading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
+
     override fun onUserInformationClick(userId: Int) {
-        TODO("Not yet implemented")
+        val fragment = UserProfileFragment()
+        val bundle = Bundle()
+        bundle.putInt("userId", userId)
+        fragment.arguments = bundle
+        val parentFragmentManager = parentFragmentManager
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

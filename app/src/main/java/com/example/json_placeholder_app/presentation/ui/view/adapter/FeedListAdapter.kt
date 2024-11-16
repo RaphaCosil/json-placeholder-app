@@ -12,6 +12,7 @@ import com.example.json_placeholder_app.domain.entity.AlbumEntity
 import com.example.json_placeholder_app.domain.entity.FeedItemEntity
 import com.example.json_placeholder_app.domain.entity.PostEntity
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
+import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration
 
 class FeedListAdapter(
     private val context: Context,
@@ -66,8 +67,12 @@ class FeedListAdapter(
         fun bind(postEntity: PostEntity) {
             binding.apply {
                 textViewUsername.text = postEntity.userName
-                textViewTitle.text = postEntity.title
-                textViewBody.text = postEntity.body
+                textViewTitle.text = postEntity.title.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase() else it.toString()
+                }
+                textViewBody.text = postEntity.body.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase() else it.toString()
+                }
                 imageViewUser.setImageResource(R.drawable.photo_user)
                 imageViewUser.setOnClickListener {
                     onUserInformationClickListener.onUserInformationClick(postEntity.userId)
@@ -85,7 +90,9 @@ class FeedListAdapter(
         fun bind(albumEntity: AlbumEntity) {
             binding.apply {
                 textViewUsername.text = albumEntity.userName
-                textViewTitle.text = albumEntity.title
+                textViewTitle.text = albumEntity.title.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase() else it.toString()
+                }
                 imageViewUser.setImageResource(R.drawable.photo_user)
                 val adapter = ImageListAdapter(albumEntity.photos)
                 recyclerViewPhotos.layoutManager = LinearLayoutManager(
@@ -94,6 +101,7 @@ class FeedListAdapter(
                     false
                 )
                 recyclerViewPhotos.adapter = adapter
+                recyclerViewPhotos.addItemDecoration(SpaceItemDecoration(8))
                 imageViewUser.setOnClickListener {
                     onUserInformationClickListener.onUserInformationClick(albumEntity.userId)
                 }

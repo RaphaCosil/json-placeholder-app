@@ -16,7 +16,7 @@ interface Service {
 
     @GET("posts")
     suspend fun getPostsByUserId(
-        @Query("userId") userId: String
+        @Query("userId") userId: Int
     ): Response<List<PostDAO>>
 
     @POST("posts/")
@@ -24,7 +24,7 @@ interface Service {
 
     @GET("posts/{id}/comments/")
     suspend fun getPostComments(
-        @Path("id") id: String
+        @Path("id") id: Int
     ): Response<List<CommentDAO>>
 
     @GET("albums")
@@ -37,7 +37,7 @@ interface Service {
 
     @GET("albums")
     suspend fun getAlbumsByUserId(
-        @Query("userId") userId: String
+        @Query("userId") userId: Int
     ): Response<List<AlbumDAO>>
 
     @GET("photos")
@@ -51,6 +51,6 @@ interface Service {
 
     @GET("users/{id}")
     suspend fun getUserById(
-        @Path("id") id: String
+        @Path("id") id: Int
     ): Response<UserDAO>
 }

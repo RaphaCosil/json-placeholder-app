@@ -24,16 +24,16 @@ class AppRepositoryImpl(private val service: Service): AppRepository {
         return feedList
     }
 
-    override suspend fun getPostsByUserId(id: String): List<PostEntity> {
+    override suspend fun getPostsByUserId(id: Int): List<PostEntity> {
         val posts = service.getPostsByUserId(id).body()?.map { it.toEntity() } ?: emptyList()
         for (post in posts) {
-            post.userName = getUserById(post.userId.toString()).name
+            post.userName = getUserById(post.userId).name
         }
         Log.d("AppRepositoryImpl", posts.toString())
         return posts
     }
 
-    override suspend fun getPostComments(id: String): List<CommentEntity> {
+    override suspend fun getPostComments(id: Int): List<CommentEntity> {
         return service.getPostComments(id).body()?.map { it.toEntity() } ?: emptyList()
     }
 
@@ -43,10 +43,10 @@ class AppRepositoryImpl(private val service: Service): AppRepository {
         )
     }
 
-    override suspend fun getAlbumsByUserId(id: String): List<AlbumEntity> {
+    override suspend fun getAlbumsByUserId(id: Int): List<AlbumEntity> {
         val albums = service.getAlbumsByUserId(id).body()?.map { it.toEntity() } ?: emptyList()
         for (album in albums) {
-            album.userName = getUserById(album.userId.toString()).name
+            album.userName = getUserById(album.userId).name
             album.photos = getPhotosByAlbumId(album.id.toString())
         }
         return albums
@@ -62,10 +62,14 @@ class AppRepositoryImpl(private val service: Service): AppRepository {
         )
     }
 
+    override suspend fun getUserById(id: Int): UserEntity {
+        return service.getUserById(id).body()?.toEntity() ?: UserEntity(0, "", "", "")
+    }
+
     private suspend fun getAlbums(): List<AlbumEntity> {
         val albums = service.getAlbums().body()?.map { it.toEntity() } ?: emptyList()
         for (album in albums) {
-            album.userName = getUserById(album.userId.toString()).name
+            album.userName = getUserById(album.userId).name
             album.photos = getPhotosByAlbumId(album.id.toString())
         }
         return albums
@@ -74,13 +78,9 @@ class AppRepositoryImpl(private val service: Service): AppRepository {
     private suspend fun getAllPosts(): List<PostEntity> {
         val posts = service.getAllPosts().body()?.map { it.toEntity() } ?: emptyList()
         for (post in posts) {
-            post.userName = getUserById(post.userId.toString()).name
+            post.userName = getUserById(post.userId).name
         }
         return posts
-    }
-
-    private suspend fun getUserById(id: String): UserEntity {
-        return service.getUserById(id).body()?.toEntity() ?: UserEntity(0, "", "", "")
     }
 
     private suspend fun getPhotosByAlbumId(id: String): List<PhotoEntity> {

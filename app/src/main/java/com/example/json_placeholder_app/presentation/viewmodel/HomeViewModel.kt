@@ -24,7 +24,9 @@ class HomeViewModel(
                 val jsonElement = gson.toJson(result)
                 feedItemList.value = gson.fromJson(jsonElement, Array<FeedItemEntity>::class.java).toList()
             } catch (e: Exception) {
-                Log.e("PostsViewModel", "Error fetching todos | MESSAGE ${e.message} | CAUSE ${e.cause}")
+                Log.e("PostsViewModel",
+                    "Error fetching todos | MESSAGE ${e.message} | CAUSE ${e.cause}"
+                )
             }
         }
     }

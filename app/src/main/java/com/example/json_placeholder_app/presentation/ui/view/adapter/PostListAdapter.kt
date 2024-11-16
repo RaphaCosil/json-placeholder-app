@@ -3,6 +3,7 @@ package com.example.json_placeholder_app.presentation.ui.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.ItemPostBinding
 import com.example.json_placeholder_app.domain.entity.PostEntity
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
@@ -25,8 +26,13 @@ class PostListAdapter(
         holder.binding.apply {
             val posts = postsList[position]
             textViewUsername.text = posts.userName
-            textViewTitle.text = posts.title
-            textViewBody.text = posts.body
+            textViewTitle.text = posts.title.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase() else it.toString()
+            }
+            textViewBody.text = posts.body.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase() else it.toString()
+            }
+            imageViewUser.setImageResource(R.drawable.photo_user)
         }
         holder.binding.imageViewUser.setOnClickListener {
             onUserInformationClickListener.onUserInformationClick(

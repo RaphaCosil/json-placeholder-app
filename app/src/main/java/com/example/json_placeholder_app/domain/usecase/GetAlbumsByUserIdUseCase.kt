@@ -6,7 +6,7 @@ import com.example.json_placeholder_app.domain.repository.AppRepository
 class GetAlbumsByUserIdUseCase(
     private val repository: AppRepository
 ) {
-    suspend operator fun invoke(id: String): List<AlbumEntity> {
+    suspend operator fun invoke(id: Int): List<AlbumEntity> {
         return repository.getAlbumsByUserId(id)
     }
 }

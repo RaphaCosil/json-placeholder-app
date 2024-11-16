@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.ItemAlbumBinding
 import com.example.json_placeholder_app.domain.entity.AlbumEntity
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
+import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration
 
 class AlbumListAdapter(
     private val context: Context,
@@ -30,7 +32,10 @@ class AlbumListAdapter(
         holder.binding.apply {
             val album = albumList[position]
             textViewUsername.text = album.userName
-            textViewTitle.text = album.title
+            textViewTitle.text = album.title.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase() else it.toString()
+            }
+            imageViewUser.setImageResource(R.drawable.photo_user)
             val adapter = ImageListAdapter(album.photos)
             recyclerViewPhotos.adapter = adapter
             recyclerViewPhotos.layoutManager = LinearLayoutManager(
@@ -38,6 +43,7 @@ class AlbumListAdapter(
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
+            recyclerViewPhotos.addItemDecoration(SpaceItemDecoration(8))
             recyclerViewPhotos.setHasFixedSize(true)
         }
         holder.binding.imageViewUser.setOnClickListener {
