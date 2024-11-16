@@ -12,6 +12,7 @@ import com.example.json_placeholder_app.domain.usecase.GetPostCommentsUseCase
 import com.example.json_placeholder_app.domain.usecase.GetPostsByUserIdUseCase
 import com.example.json_placeholder_app.domain.usecase.GetUserByIdUseCase
 import com.example.json_placeholder_app.presentation.viewmodel.AlbumsOfUserViewModel
+import com.example.json_placeholder_app.presentation.viewmodel.CommentsOfUserViewModel
 import com.example.json_placeholder_app.presentation.viewmodel.CreatePostViewModel
 import com.example.json_placeholder_app.presentation.viewmodel.FindUsersViewModel
 import com.example.json_placeholder_app.presentation.viewmodel.HomeViewModel
@@ -84,5 +85,8 @@ val presentationModule = module {
     }
     viewModel{
         PostsOfUserViewModel(get())
+    }
+    viewModel{
+        CommentsOfUserViewModel(get())
     }
 }

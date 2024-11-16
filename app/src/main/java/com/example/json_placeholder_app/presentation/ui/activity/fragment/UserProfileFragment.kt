@@ -1,7 +1,6 @@
 package com.example.json_placeholder_app.presentation.ui.activity.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.FragmentUserProfileBinding
 import com.example.json_placeholder_app.presentation.viewmodel.UserProfileViewModel
-import kotlin.properties.Delegates
 
 class UserProfileFragment : Fragment() {
     private lateinit var binding: FragmentUserProfileBinding
@@ -29,42 +27,45 @@ class UserProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btPostsOfUser.setImageResource(R.drawable.icon_posts_fill)
+        binding.btAlbumsOfUser.setImageResource(R.drawable.icon_albums_line)
+
         viewModel.getUser(userId)
         viewModel.users.observe(viewLifecycleOwner) {
             binding.textViewUsername.text = it.username
-            binding.btPostsOfUser.setImageResource(R.drawable.icon_posts_fill)
-            binding.btAlbumsOfUser.setImageResource(R.drawable.icon_albums_line)
-            val fragment = PostsOfUserFragment()
-            val bundle = Bundle()
-            bundle.putInt("userId", userId)
-            fragment.arguments = bundle
+            val fragmentStandart = PostsOfUserFragment()
+            val bundleStandart = Bundle()
+            bundleStandart.putInt("userId", userId)
+            fragmentStandart.arguments = bundleStandart
             parentFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
+                .replace(R.id.fragment_container, fragmentStandart)
                 .commit()
 
             binding.btPostsOfUser.setOnClickListener {
                 binding.btPostsOfUser.setImageResource(R.drawable.icon_posts_fill)
                 binding.btAlbumsOfUser.setImageResource(R.drawable.icon_albums_line)
-                val fragment = PostsOfUserFragment()
-                val bundle = Bundle()
-                bundle.putInt("userId", userId)
-                fragment.arguments = bundle
+                val fragmentPost = PostsOfUserFragment()
+                val bundlePost = Bundle()
+                bundlePost.putInt("userId", userId)
+                fragmentPost.arguments = bundlePost
                 parentFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
+                    .replace(R.id.fragment_container, fragmentPost)
                     .commit()
             }
+
             binding.btAlbumsOfUser.setOnClickListener {
                 binding.btPostsOfUser.setImageResource(R.drawable.icon_posts_line)
                 binding.btAlbumsOfUser.setImageResource(R.drawable.icon_albums_fill)
-                val fragment = AlbumsOfUserFragment()
-                val bundle = Bundle()
-                bundle.putInt("userId", userId)
-                fragment.arguments = bundle
+                val fragmentAlbums = AlbumsOfUserFragment()
+                val bundleAlbums = Bundle()
+                bundleAlbums.putInt("userId", userId)
+                fragmentAlbums.arguments = bundleAlbums
                 parentFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
+                    .replace(R.id.fragment_container, fragmentAlbums)
                     .commit()
             }
         }

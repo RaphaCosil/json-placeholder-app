@@ -15,7 +15,6 @@ import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUs
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration
 import com.example.json_placeholder_app.presentation.viewmodel.AlbumsOfUserViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.properties.Delegates
 
 class AlbumsOfUserFragment : Fragment(), OnUserInformationClickListener {
     private lateinit var binding: FragmentAlbumsOfUserBinding

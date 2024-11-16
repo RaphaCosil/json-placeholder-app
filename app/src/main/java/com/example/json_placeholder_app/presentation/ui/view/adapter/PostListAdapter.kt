@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.ItemPostBinding
 import com.example.json_placeholder_app.domain.entity.PostEntity
+import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnCommentClickListener
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
 
 class PostListAdapter(
     private val postsList: List<PostEntity>,
-    private val onUserInformationClickListener: OnUserInformationClickListener
+    private val onUserInformationClickListener: OnUserInformationClickListener,
+    private val onCommentClickListener: OnCommentClickListener
 ) : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
     inner class PostViewHolder(val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root)
     override fun getItemCount() = postsList.size
@@ -43,6 +45,9 @@ class PostListAdapter(
             onUserInformationClickListener.onUserInformationClick(
                 postsList[position].userId
             )
+        }
+        holder.binding.imageButtonComment.setOnClickListener {
+            onCommentClickListener.onCommentClick(postsList[position].id)
         }
     }
 }

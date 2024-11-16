@@ -1,5 +1,6 @@
 package com.example.json_placeholder_app.presentation.ui.activity.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,16 +10,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.json_placeholder_app.databinding.FragmentPostsOfUserBinding
-import com.example.json_placeholder_app.domain.entity.FeedItemEntity
 import com.example.json_placeholder_app.domain.entity.PostEntity
+import com.example.json_placeholder_app.presentation.ui.activity.CommentsOfUserActivity
 import com.example.json_placeholder_app.presentation.ui.view.adapter.PostListAdapter
+import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnCommentClickListener
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration
 import com.example.json_placeholder_app.presentation.viewmodel.PostsOfUserViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.properties.Delegates
 
-class PostsOfUserFragment : Fragment(), OnUserInformationClickListener {
+class PostsOfUserFragment : Fragment(), OnUserInformationClickListener, OnCommentClickListener {
     private lateinit var binding: FragmentPostsOfUserBinding
     private val viewModel: PostsOfUserViewModel by viewModel()
     private var userId: Int = 0
@@ -52,6 +53,7 @@ class PostsOfUserFragment : Fragment(), OnUserInformationClickListener {
     private fun setupRecycler(postList: List<PostEntity>) = binding.postsRecycleView .apply {
         val postListAdapter = PostListAdapter(
             postList,
+            this@PostsOfUserFragment,
             this@PostsOfUserFragment
         )
         adapter = postListAdapter
@@ -69,5 +71,11 @@ class PostsOfUserFragment : Fragment(), OnUserInformationClickListener {
 
     override fun onUserInformationClick(userId: Int) {
         Log.d("PostsOfUserFragment", "onUserInformationClick: $userId")
+    }
+
+    override fun onCommentClick(postId: Int) {
+        val intent = Intent(requireContext(), CommentsOfUserActivity::class.java)
+        intent.putExtra("postId", postId)
+        startActivity(intent)
     }
 }

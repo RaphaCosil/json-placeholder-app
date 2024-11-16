@@ -34,13 +34,13 @@
             android:background="@drawable/style_background"
             app:srcCompat="@drawable/icon_search_line" />
 
-        <ImageButton
-            android:id="@+id/bt_create"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:background="@drawable/style_background"
-            app:srcCompat="@drawable/icon_create_line" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/bt_create"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/style_background"-->
+<!--            app:srcCompat="@drawable/icon_create_line" />-->
 
         <ImageButton
             android:id="@+id/bt_user_profile"

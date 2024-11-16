@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btHome.setImageResource(R.drawable.icon_home_fill)
-        binding.btCreate.setImageResource(R.drawable.icon_create_line)
+//        binding.btCreate.setImageResource(R.drawable.icon_create_line)
         binding.btSearch.setImageResource(R.drawable.icon_search_line)
         binding.btUserProfile.setImageResource(R.drawable.icon_user_line)
 
@@ -34,21 +34,21 @@ class MainActivity : AppCompatActivity() {
                 replace<HomeFragment>(R.id.fragment)
             }
             binding.btHome.setImageResource(R.drawable.icon_home_fill)
-            binding.btCreate.setImageResource(R.drawable.icon_create_line)
+//            binding.btCreate.setImageResource(R.drawable.icon_create_line)
             binding.btSearch.setImageResource(R.drawable.icon_search_line)
             binding.btUserProfile.setImageResource(R.drawable.icon_user_line)
         }
 
-        binding.btCreate.setOnClickListener {
-            supportFragmentManager.commit {
-                setReorderingAllowed(true)
-                replace<CreatePostFragment>(R.id.fragment)
-            }
-            binding.btHome.setImageResource(R.drawable.icon_home_line)
-            binding.btCreate.setImageResource(R.drawable.icon_create_fill)
-            binding.btSearch.setImageResource(R.drawable.icon_search_line)
-            binding.btUserProfile.setImageResource(R.drawable.icon_user_line)
-        }
+//        binding.btCreate.setOnClickListener {
+//            supportFragmentManager.commit {
+//                setReorderingAllowed(true)
+//                replace<CreatePostFragment>(R.id.fragment)
+//            }
+//            binding.btHome.setImageResource(R.drawable.icon_home_line)
+//            binding.btCreate.setImageResource(R.drawable.icon_create_fill)
+//            binding.btSearch.setImageResource(R.drawable.icon_search_line)
+//            binding.btUserProfile.setImageResource(R.drawable.icon_user_line)
+//        }
 
         binding.btSearch.setOnClickListener {
             supportFragmentManager.commit {
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                 replace<FindUsersFragment>(R.id.fragment)
             }
             binding.btHome.setImageResource(R.drawable.icon_home_line)
-            binding.btCreate.setImageResource(R.drawable.icon_create_line)
+//            binding.btCreate.setImageResource(R.drawable.icon_create_line)
             binding.btSearch.setImageResource(R.drawable.icon_search_fill)
             binding.btUserProfile.setImageResource(R.drawable.icon_user_line)
         }
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                 replace(R.id.fragment, fragment)
             }
             binding.btHome.setImageResource(R.drawable.icon_home_line)
-            binding.btCreate.setImageResource(R.drawable.icon_create_line)
+//            binding.btCreate.setImageResource(R.drawable.icon_create_line)
             binding.btSearch.setImageResource(R.drawable.icon_search_line)
             binding.btUserProfile.setImageResource(R.drawable.icon_user_fill)
         }

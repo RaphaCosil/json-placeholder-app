@@ -11,6 +11,7 @@ import com.example.json_placeholder_app.databinding.ItemPostBinding
 import com.example.json_placeholder_app.domain.entity.AlbumEntity
 import com.example.json_placeholder_app.domain.entity.FeedItemEntity
 import com.example.json_placeholder_app.domain.entity.PostEntity
+import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnCommentClickListener
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration
 
@@ -18,6 +19,7 @@ class FeedListAdapter(
     private val context: Context,
     private val itemList: List<FeedItemEntity>,
     private val onUserInformationClickListener: OnUserInformationClickListener,
+    private val onCommentClickListener: OnCommentClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val viewTypePost= 1
@@ -79,6 +81,9 @@ class FeedListAdapter(
                 }
                 textViewUsername.setOnClickListener {
                     onUserInformationClickListener.onUserInformationClick(postEntity.userId)
+                }
+                imageButtonComment.setOnClickListener {
+                    onCommentClickListener.onCommentClick(postEntity.id)
                 }
             }
         }
