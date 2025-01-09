@@ -33,7 +33,7 @@ interface Service {
     ): Response<List<AlbumDAO>>
 
     @POST("albums/")
-    suspend fun createAlbum(@Body album: AlbumDAO)
+    suspend fun createAlbum(@Body album: AlbumDAO): Response<AlbumDAO>
 
     @GET("albums")
     suspend fun getAlbumsByUserId(
@@ -45,6 +45,14 @@ interface Service {
         @Query("albumId") albumId: String,
         @Query("_limit") limit: Int = 2
     ): Response<List<PhotoDAO>>
+
+    @GET("photos")
+    suspend fun getPhotos(
+        @Query("_limit") limit: Int = 10
+    ): Response<List<PhotoDAO>>
+
+    @POST("photos/")
+    suspend fun createPhoto(@Body photo: PhotoDAO)
 
     @GET("users/")
     suspend fun getUsers(): Response<List<UserDAO>>

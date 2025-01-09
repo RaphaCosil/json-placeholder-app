@@ -56,14 +56,24 @@ class AppRepositoryImpl(private val service: Service): AppRepository {
         return service.getUsers().body()?.map { it.toEntity() } ?: emptyList()
     }
 
-    override suspend fun createAlbum(album: AlbumEntity) {
-        service.createAlbum(
+    override suspend fun createAlbum(album: AlbumEntity): AlbumEntity?  {
+        return service.createAlbum(
             album.toData()
-        )
+        ).body()?.toEntity()
     }
 
     override suspend fun getUserById(id: Int): UserEntity {
         return service.getUserById(id).body()?.toEntity() ?: UserEntity(0, "", "", "")
+    }
+
+    override suspend fun getPhotos(): List<PhotoEntity> {
+        return service.getPhotos().body()?.map { it.toEntity() } ?: emptyList()
+    }
+
+    override suspend fun createPhoto(photo: PhotoEntity) {
+        service.createPhoto(
+            photo.toData()
+        )
     }
 
     private suspend fun getAlbums(): List<AlbumEntity> {

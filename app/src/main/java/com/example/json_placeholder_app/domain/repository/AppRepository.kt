@@ -2,6 +2,7 @@ package com.example.json_placeholder_app.domain.repository
 
 import com.example.json_placeholder_app.domain.entity.AlbumEntity
 import com.example.json_placeholder_app.domain.entity.CommentEntity
+import com.example.json_placeholder_app.domain.entity.PhotoEntity
 import com.example.json_placeholder_app.domain.entity.PostEntity
 import com.example.json_placeholder_app.domain.entity.UserEntity
 
@@ -11,7 +12,9 @@ interface AppRepository {
     suspend fun getPostComments(id: Int): List<CommentEntity>
     suspend fun createPost(post: PostEntity)
     suspend fun getAlbumsByUserId(id: Int): List<AlbumEntity>
-    suspend fun createAlbum(album: AlbumEntity)
+    suspend fun createAlbum(album: AlbumEntity): AlbumEntity?
+    suspend fun getPhotos(): List<PhotoEntity>
+    suspend fun createPhoto(photo: PhotoEntity)
     suspend fun getAllUsers(): List<UserEntity>
     suspend fun getUserById(id: Int): UserEntity
 }

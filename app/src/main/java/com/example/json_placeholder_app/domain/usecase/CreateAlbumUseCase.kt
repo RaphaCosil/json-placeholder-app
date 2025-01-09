@@ -6,7 +6,7 @@ import com.example.json_placeholder_app.domain.repository.AppRepository
 class CreateAlbumUseCase(
     private val repository: AppRepository
 ) {
-    suspend operator fun invoke(album: AlbumEntity) {
-        repository.createAlbum(album)
+    suspend operator fun invoke(album: AlbumEntity): AlbumEntity? {
+        return repository.createAlbum(album)
     }
 }

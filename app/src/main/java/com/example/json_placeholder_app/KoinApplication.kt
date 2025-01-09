@@ -4,15 +4,18 @@ import com.example.json_placeholder_app.data.datasource.Service
 import com.example.json_placeholder_app.data.repository.AppRepositoryImpl
 import com.example.json_placeholder_app.domain.repository.AppRepository
 import com.example.json_placeholder_app.domain.usecase.CreateAlbumUseCase
+import com.example.json_placeholder_app.domain.usecase.CreatePhotoUseCase
 import com.example.json_placeholder_app.domain.usecase.CreatePostUseCase
 import com.example.json_placeholder_app.domain.usecase.GetAlbumsByUserIdUseCase
 import com.example.json_placeholder_app.domain.usecase.GetAllUsersUseCase
 import com.example.json_placeholder_app.domain.usecase.GetFeedListUseCase
+import com.example.json_placeholder_app.domain.usecase.GetPhotosUseCase
 import com.example.json_placeholder_app.domain.usecase.GetPostCommentsUseCase
 import com.example.json_placeholder_app.domain.usecase.GetPostsByUserIdUseCase
 import com.example.json_placeholder_app.domain.usecase.GetUserByIdUseCase
 import com.example.json_placeholder_app.presentation.viewmodel.AlbumsOfUserViewModel
 import com.example.json_placeholder_app.presentation.viewmodel.CommentsOfUserViewModel
+import com.example.json_placeholder_app.presentation.viewmodel.CreateAlbumViewModel
 import com.example.json_placeholder_app.presentation.viewmodel.CreatePostViewModel
 import com.example.json_placeholder_app.presentation.viewmodel.FindUsersViewModel
 import com.example.json_placeholder_app.presentation.viewmodel.HomeViewModel
@@ -65,6 +68,12 @@ val domainModule = module {
     factory {
         GetUserByIdUseCase(get())
     }
+    factory {
+        GetPhotosUseCase(get())
+    }
+    factory {
+        CreatePhotoUseCase(get())
+    }
 }
 
 val presentationModule = module {
@@ -88,5 +97,8 @@ val presentationModule = module {
     }
     viewModel{
         CommentsOfUserViewModel(get())
+    }
+    viewModel{
+        CreateAlbumViewModel(get(), get(), get())
     }
 }

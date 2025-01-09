@@ -2,7 +2,6 @@ package com.example.json_placeholder_app.presentation.ui.activity.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +17,7 @@ import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnCo
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration
 import com.example.json_placeholder_app.presentation.viewmodel.HomeViewModel
+import com.example.json_placeholder_app.presentation.viewmodel.action.HomeAction
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment(), OnUserInformationClickListener, OnCommentClickListener {
@@ -34,21 +34,32 @@ class HomeFragment : Fragment(), OnUserInformationClickListener, OnCommentClickL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        try {
-            loading(true)
-            homeViewModel.getFeedList()
-            homeViewModel.feedItemList.observe(viewLifecycleOwner) {
-                Log.d("PostsViewModel", "getPosts result: $it")
-                setupRecycler(it)
-                loading(false)
+        loading(true)
+        homeViewModel.handleAction(HomeAction.LoadData)
+        setupObserver()
+    }
+
+    private fun setupObserver() {
+        homeViewModel.homeState.observe(
+            viewLifecycleOwner
+        ) {
+            loading(it.isLoading)
+            it.errorMessage?.let { error ->
+                Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
             }
-        } catch (e: Exception) {
-            Log.e("PostsViewModel", "Error fetching todos | MESSAGE ${e.message} | CAUSE ${e.cause}")
-            Toast.makeText(requireContext(), "Error fetching posts", Toast.LENGTH_SHORT).show()
-            loading(false)
+            setupRecycler(it.data)
         }
     }
-    private fun setupRecycler(feedList: List<FeedItemEntity>) = binding.feedRecycleView .apply {
+
+    private fun loading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
+
+    private fun setupRecycler(feedList: List<FeedItemEntity>) = binding.feedRecycleView.apply {
         val feedListAdapter = FeedListAdapter(
             requireActivity(),
             feedList,
@@ -58,14 +69,6 @@ class HomeFragment : Fragment(), OnUserInformationClickListener, OnCommentClickL
         adapter = feedListAdapter
         layoutManager = LinearLayoutManager(context)
         addItemDecoration(SpaceItemDecoration(48))
-    }
-
-    private fun loading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
     }
 
     override fun onUserInformationClick(userId: Int) {
