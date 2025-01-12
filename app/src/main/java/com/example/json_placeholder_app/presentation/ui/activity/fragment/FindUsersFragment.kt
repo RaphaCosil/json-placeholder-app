@@ -15,6 +15,7 @@ import com.example.json_placeholder_app.presentation.ui.view.adapter.UserListAda
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserItemClickListener
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration
 import com.example.json_placeholder_app.presentation.viewmodel.FindUsersViewModel
+import com.example.json_placeholder_app.presentation.viewmodel.action.FindUsersAction
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FindUsersFragment : Fragment(), OnUserItemClickListener {
@@ -32,16 +33,21 @@ class FindUsersFragment : Fragment(), OnUserItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         try {
-            loading(true)
-            viewModel.getAllUsers()
-            viewModel.users.observe(viewLifecycleOwner) {
-                setupRecycler(it)
-                loading(false)
-            }
+            viewModel.handleAction(FindUsersAction.LoadUsers)
+            setupObserver()
         } catch (e: Exception) {
             Log.d("FindUsersFragment", "onViewCreated: $e")
             Toast.makeText(requireContext(), "Error fetching users", Toast.LENGTH_SHORT).show()
-            loading(false)
+        }
+    }
+
+    private fun setupObserver() {
+        viewModel.findUsersState.observe(viewLifecycleOwner) {
+            loading(it.isLoading)
+            setupRecycler(it.data)
+            it.errorMessage?.let { error ->
+                Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

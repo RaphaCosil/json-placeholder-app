@@ -1,14 +1,16 @@
 package com.example.json_placeholder_app.presentation.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.json_placeholder_app.domain.entity.AlbumEntity
-import com.example.json_placeholder_app.domain.entity.PhotoEntity
 import com.example.json_placeholder_app.domain.usecase.CreateAlbumUseCase
 import com.example.json_placeholder_app.domain.usecase.CreatePhotoUseCase
 import com.example.json_placeholder_app.domain.usecase.GetPhotosUseCase
+import com.example.json_placeholder_app.presentation.viewmodel.action.CreateAlbumAction
+import com.example.json_placeholder_app.presentation.viewmodel.state.CreateAlbumState
 import kotlinx.coroutines.launch
 
 class CreateAlbumViewModel(
@@ -16,39 +18,47 @@ class CreateAlbumViewModel(
     private val createAlbumUseCase: CreateAlbumUseCase,
     private val createPhotoUseCase: CreatePhotoUseCase
 ): ViewModel() {
-    val isSuccessful = MutableLiveData<Boolean>()
-    val photoList = MutableLiveData<List<PhotoEntity>>()
-    fun createAlbum(album: AlbumEntity) {
-        try {
-            viewModelScope.launch {
+    private val _createAlbumState = MutableLiveData<CreateAlbumState>()
+    val createAlbumState: LiveData<CreateAlbumState> = _createAlbumState
+
+    init{
+        _createAlbumState.value = CreateAlbumState()
+    }
+
+    fun handleAction(action: CreateAlbumAction) {
+        when (action) {
+            is CreateAlbumAction.CreateAlbum -> createAlbum(action.album)
+            is CreateAlbumAction.AlbumCreated -> onAlbumCreated(action.album)
+            is CreateAlbumAction.Error -> onError(action.error)
+        }
+    }
+
+    private fun onAlbumCreated(album: AlbumEntity) {
+        _createAlbumState.value = _createAlbumState.value?.copy(isSuccessful = true)
+        _createAlbumState.value = _createAlbumState.value?.copy(album = album)
+    }
+
+    private fun onError(error: String) {
+        _createAlbumState.value = _createAlbumState.value?.copy(errorMessage = error)
+    }
+
+    private fun createAlbum(album: AlbumEntity) {
+        viewModelScope.launch {
+            try {
                 val result = createAlbumUseCase.invoke(album)
                 for (photo in album.photos) {
                     photo.albumId = result?.id!!
                     createPhotoUseCase.invoke(photo)
                 }
-                isSuccessful.value = true
+                _createAlbumState.value = _createAlbumState.value?.copy(isSuccessful = true)
+            } catch (e: Exception) {
+                Log.e("CreateAlbumViewModel",
+                    "Error creating album | MESSAGE ${e.message} | CAUSE ${e.cause}"
+                )
+                onError(
+                    e.message ?: "Error creating album"
+                )
             }
-        } catch (e: Exception) {
-            isSuccessful.value = false
-            Log.e(
-                "PostsViewModel",
-                "Error fetching todos | MESSAGE ${e.message} | CAUSE ${e.cause}"
-            )
         }
     }
-
-    fun getPhotos(){
-        try {
-            viewModelScope.launch {
-                val result = getPhotoUseCase.invoke()
-                photoList.value = result
-            }
-        } catch (e: Exception) {
-            Log.e(
-                "PostsViewModel",
-                "Error fetching todos | MESSAGE ${e.message} | CAUSE ${e.cause}"
-            )
-        }
-    }
-
 }

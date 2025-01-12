@@ -7,28 +7,44 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.json_placeholder_app.domain.entity.PostEntity
 import com.example.json_placeholder_app.domain.usecase.CreatePostUseCase
+import com.example.json_placeholder_app.presentation.viewmodel.action.CreatePostAction
+import com.example.json_placeholder_app.presentation.viewmodel.state.CreatePostState
 import kotlinx.coroutines.launch
 
 class CreatePostViewModel(
     private val createPostUseCase: CreatePostUseCase
 ): ViewModel() {
+    private val _createPostState = MutableLiveData<CreatePostState>()
+    val createPostState: LiveData<CreatePostState> = _createPostState
+    init {
+        _createPostState.value = CreatePostState()
+    }
 
-    private val _errorMessage = MutableLiveData<String>()
+    fun handleAction(action: CreatePostAction) {
+        when (action) {
+            is CreatePostAction.CreatePost -> createPost(action.post)
+            is CreatePostAction.PostCreated -> onPostCreated()
+            is CreatePostAction.Error -> onError(action.error)
+        }
+    }
 
-    val errorMessage: MutableLiveData<String> = _errorMessage
+    private fun onPostCreated() {
+        _createPostState.value = _createPostState.value?.copy(isSuccessful = true)
+    }
 
-    private val _isCreated = MutableLiveData<Boolean>()
-    val isCreated: LiveData<Boolean> = _isCreated
-    fun createPost(post: PostEntity) {
+    private fun onError(error: String) {
+        _createPostState.value = _createPostState.value?.copy(errorMessage = error)
+    }
+
+    private fun createPost(post: PostEntity) {
         viewModelScope.launch {
             try {
-                val result = createPostUseCase.invoke(post).let {
-                    _isCreated.value = true
-                }
+                val result = createPostUseCase.invoke(post)
+                _createPostState.value = _createPostState.value?.copy(isSuccessful = true)
                 Log.d("PostsViewModel", "createPost result: $result")
             } catch (e: Exception) {
                 Log.e("PostsViewModel", "Error fetching todos | MESSAGE ${e.message} | CAUSE ${e.cause}")
-                _errorMessage.value = e.message
+                onError(e.message.toString())
             }
         }
     }

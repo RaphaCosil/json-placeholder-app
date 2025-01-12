@@ -14,6 +14,7 @@ import com.example.json_placeholder_app.presentation.ui.view.adapter.AlbumListAd
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration
 import com.example.json_placeholder_app.presentation.viewmodel.AlbumsOfUserViewModel
+import com.example.json_placeholder_app.presentation.viewmodel.action.AlbumsOfUserAction
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AlbumsOfUserFragment : Fragment(), OnUserInformationClickListener {
@@ -35,15 +36,22 @@ class AlbumsOfUserFragment : Fragment(), OnUserInformationClickListener {
         super.onViewCreated(view, savedInstanceState)
         loading(true)
         try {
-            viewModel.getAlbumsByUserId(userId)
-            viewModel.albumList.observe(viewLifecycleOwner) {
-                setupRecycler(it)
-                loading(false)
-            }
+            viewModel.handleAction(AlbumsOfUserAction.LoadData(userId))
+            setupObserver()
         } catch (e: Exception) {
             Log.d("AlbumsOfUserFragment", "onViewCreated: $e")
             Toast.makeText(requireContext(), "Error fetching albums", Toast.LENGTH_SHORT).show()
             loading(false)
+        }
+    }
+
+    private fun setupObserver() {
+        viewModel.getAlbumsOfUserState.observe(viewLifecycleOwner) {
+            loading(it.isLoading)
+            setupRecycler(it.data)
+            it.errorMessage?.let { error ->
+                Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

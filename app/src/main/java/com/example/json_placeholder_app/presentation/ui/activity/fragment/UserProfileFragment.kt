@@ -34,13 +34,13 @@ class UserProfileFragment : Fragment() {
         viewModel.getUser(userId)
         viewModel.users.observe(viewLifecycleOwner) {
             binding.textViewUsername.text = it.username
-            val fragmentStandart = PostsOfUserFragment()
-            val bundleStandart = Bundle()
-            bundleStandart.putInt("userId", userId)
-            fragmentStandart.arguments = bundleStandart
+            val fragmentStandard = PostsOfUserFragment()
+            val bundleStandard = Bundle()
+            bundleStandard.putInt("userId", userId)
+            fragmentStandard.arguments = bundleStandard
             parentFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, fragmentStandart)
+                .replace(R.id.fragment_container, fragmentStandard)
                 .commit()
 
             binding.btPostsOfUser.setOnClickListener {

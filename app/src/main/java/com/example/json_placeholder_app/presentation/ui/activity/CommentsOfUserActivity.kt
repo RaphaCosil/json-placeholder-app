@@ -11,6 +11,7 @@ import com.example.json_placeholder_app.domain.entity.CommentEntity
 import com.example.json_placeholder_app.presentation.ui.view.adapter.CommentListAdapter
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration
 import com.example.json_placeholder_app.presentation.viewmodel.CommentsOfUserViewModel
+import com.example.json_placeholder_app.presentation.viewmodel.action.CommentsOfUserAction
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CommentsOfUserActivity : AppCompatActivity() {
@@ -24,19 +25,27 @@ class CommentsOfUserActivity : AppCompatActivity() {
             finish()
         }
         val postId = intent.getIntExtra("postId", 0)
-        try{
+        try {
             loading(true)
-            viewModel.getCommentsByPostId(postId)
-            viewModel.comments.observe(this) {
-                setupRecycler(it)
-                loading(false)
-            }
+            viewModel.handleAction(CommentsOfUserAction.LoadComments(postId))
+            setupObserver()
         } catch (e: Exception) {
             Toast.makeText(this, "Error fetching comments", Toast.LENGTH_SHORT).show()
             loading(false)
             Log.d("CommentsOfUserActivity", "onCreate: $e")
         }
     }
+
+    private fun setupObserver() {
+        viewModel.commentsOfUserState.observe(this) {
+            loading(it.isLoading)
+            setupRecycler(it.data)
+            it.errorMessage?.let { error ->
+                Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun setupRecycler(commentList: List<CommentEntity>) = binding.recyclerViewComments .apply {
         val commentListAdapter = CommentListAdapter(
             commentList

@@ -17,6 +17,7 @@ import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnCo
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration
 import com.example.json_placeholder_app.presentation.viewmodel.PostsOfUserViewModel
+import com.example.json_placeholder_app.presentation.viewmodel.action.PostsOfUserAction
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PostsOfUserFragment : Fragment(), OnUserInformationClickListener, OnCommentClickListener {
@@ -39,17 +40,25 @@ class PostsOfUserFragment : Fragment(), OnUserInformationClickListener, OnCommen
         super.onViewCreated(view, savedInstanceState)
         try {
             loading(true)
-            viewModel.getPostsByUserId(userId)
-            viewModel.postList.observe(viewLifecycleOwner) {
-                setupRecycler(it)
-                loading(false)
-            }
+            viewModel.handleAction(PostsOfUserAction.LoadPosts(userId))
+            setupObserver()
         } catch (e: Exception) {
             Log.d("PostsOfUserFragment", "onViewCreated: $e")
             Toast.makeText(requireContext(), "Error fetching posts", Toast.LENGTH_SHORT).show()
             loading(false)
         }
     }
+
+    private fun setupObserver() {
+        viewModel.postsOfUserState.observe(viewLifecycleOwner) {
+            loading(it.isLoading)
+            setupRecycler(it.data)
+            it.errorMessage?.let { error ->
+                Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun setupRecycler(postList: List<PostEntity>) = binding.postsRecycleView .apply {
         val postListAdapter = PostListAdapter(
             postList,
