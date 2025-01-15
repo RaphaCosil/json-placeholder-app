@@ -83,6 +83,9 @@ val presentationModule = module {
     viewModel {
         CreatePostViewModel(get())
     }
+    viewModel {
+        CreateAlbumViewModel(get(), get())
+    }
     viewModel{
         UserProfileViewModel(get())
     }
@@ -97,8 +100,5 @@ val presentationModule = module {
     }
     viewModel{
         CommentsOfUserViewModel(get())
-    }
-    viewModel{
-        CreateAlbumViewModel(get(), get(), get())
     }
 }

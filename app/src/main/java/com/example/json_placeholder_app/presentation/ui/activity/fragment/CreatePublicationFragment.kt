@@ -6,14 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.json_placeholder_app.databinding.FragmentCreatePublicationBinding
-import com.example.json_placeholder_app.presentation.viewmodel.CreateAlbumViewModel
-import com.example.json_placeholder_app.presentation.viewmodel.CreatePostViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreatePublicationFragment : Fragment() {
     private lateinit var binding: FragmentCreatePublicationBinding
-    private val createPostViewModel: CreatePostViewModel by viewModel()
-    private val createAlbumViewModel: CreateAlbumViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

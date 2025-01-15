@@ -5,12 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.FragmentCreateAlbumBinding
+import com.example.json_placeholder_app.presentation.viewmodel.CreateAlbumViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateAlbumFragment : Fragment() {
     private lateinit var binding: FragmentCreateAlbumBinding
-
+    private val createAlbumViewModel: CreateAlbumViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
