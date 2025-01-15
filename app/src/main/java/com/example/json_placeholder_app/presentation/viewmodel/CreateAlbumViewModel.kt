@@ -38,7 +38,6 @@ class CreateAlbumViewModel(
         viewModelScope.launch {
             try {
                 val result = getPhotoUseCase.invoke()
-                _createAlbumState.value = _createAlbumState.value?.copy(isSuccessful = true)
                 _createAlbumState.value = _createAlbumState.value?.copy(photos = result)
             } catch (e: Exception) {
                 Log.e("CreateAlbumViewModel",

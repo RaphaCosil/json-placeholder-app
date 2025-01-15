@@ -36,7 +36,7 @@ class PhotoListAdapter(
             .into(holder.binding.image)
 
         holder.itemView.setOnClickListener {
-            onPhotoClickListener.onPhotoClick(position)
+            onPhotoClickListener.onPhotoClick(photoUrlList[position])
         }
     }
 }

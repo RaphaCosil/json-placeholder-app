@@ -20,7 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CreateAlbumFragment : Fragment(), OnPhotoClickListener {
     private lateinit var binding: FragmentCreateAlbumBinding
     private val createAlbumViewModel: CreateAlbumViewModel by viewModel()
-    private val photosSelected = emptyList<PhotoEntity>()
+    private val photosSelected = mutableListOf<PhotoEntity>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,23 +43,35 @@ class CreateAlbumFragment : Fragment(), OnPhotoClickListener {
                 )
             }
         }
+        setupObserver()
     }
 
-    fun setupObserver() {
+    private fun setupObserver() {
         createAlbumViewModel.createAlbumState.observe(viewLifecycleOwner) {
             loading(it.isLoading)
+            setupRecycler(it.photos)
             it.errorMessage?.let { error ->
                 Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+            }
+            it.isSuccessful.let { success ->
+                if (success) {
+                    Toast.makeText(requireContext(), "Album created", Toast.LENGTH_SHORT).show()
+                    parentFragmentManager.popBackStack()
+                }
             }
         }
     }
 
-    fun setupRecycler(photoList : List<PhotoEntity>) = binding.recyclerView .apply {
+    private fun setupRecycler(photoList : List<PhotoEntity>) = binding.recyclerView .apply {
         val photoListAdapter = PhotoListAdapter(
             photoList,
             this@CreateAlbumFragment
         )
-        layoutManager = LinearLayoutManager(requireContext())
+        layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
         adapter = photoListAdapter
         addItemDecoration(SpaceItemDecoration(8))
     }
@@ -91,7 +103,14 @@ class CreateAlbumFragment : Fragment(), OnPhotoClickListener {
         }
     }
 
-    override fun onPhotoClick(position: Int) {
-        TODO("Not yet implemented")
+    override fun onPhotoClick(photoEntity: PhotoEntity) {
+        if (photosSelected.contains(photoEntity)) {
+            photosSelected.remove(photoEntity)
+        } else if (photosSelected.size >= 2) {
+            Toast.makeText(requireContext(), "You can't select more than 2 photos", Toast.LENGTH_SHORT).show()
+        } else {
+            photosSelected.add(photoEntity)
+        }
     }
+
 }
