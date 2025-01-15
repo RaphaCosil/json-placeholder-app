@@ -53,4 +53,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="description">description</string>
+    <string name="create_album">create album</string>
+    <string name="create_post">create post</string>
 </resources>
