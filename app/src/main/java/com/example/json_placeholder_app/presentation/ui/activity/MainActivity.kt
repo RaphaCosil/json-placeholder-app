@@ -6,7 +6,6 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.ActivityMainBinding
-import com.example.json_placeholder_app.presentation.ui.activity.fragment.CreatePostFragment
 import com.example.json_placeholder_app.presentation.ui.activity.fragment.FindUsersFragment
 import com.example.json_placeholder_app.presentation.ui.activity.fragment.HomeFragment
 import com.example.json_placeholder_app.presentation.ui.activity.fragment.UserProfileFragment

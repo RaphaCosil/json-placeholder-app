@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.json_placeholder_app.R
-import com.example.json_placeholder_app.databinding.FragmentCreatePostBinding
+import com.example.json_placeholder_app.databinding.FragmentCreateAlbumBinding
 
-class CreatePostFragment : Fragment() {
-    private lateinit var binding: FragmentCreatePostBinding
+class CreateAlbumFragment : Fragment() {
+    private lateinit var binding: FragmentCreateAlbumBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCreatePostBinding.inflate(inflater, container, false)
+        binding = FragmentCreateAlbumBinding.inflate(inflater, container, false)
         return binding.root
     }
 
