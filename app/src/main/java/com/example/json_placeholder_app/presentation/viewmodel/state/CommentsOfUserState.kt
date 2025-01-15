@@ -1,6 +1,6 @@
 package com.example.json_placeholder_app.presentation.viewmodel.state
 
-import com.example.json_placeholder_app.domain.entity.CommentEntity
+import com.example.domain.entity.CommentEntity
 
 data class CommentsOfUserState (
     val isLoading: Boolean = false,

@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.json_placeholder_app.domain.entity.AlbumEntity
-import com.example.json_placeholder_app.domain.entity.PhotoEntity
-import com.example.json_placeholder_app.domain.usecase.CreateAlbumUseCase
-import com.example.json_placeholder_app.domain.usecase.GetPhotosUseCase
+import com.example.domain.entity.AlbumEntity
+import com.example.domain.entity.PhotoEntity
+import com.example.domain.usecase.CreateAlbumUseCase
+import com.example.domain.usecase.GetPhotosUseCase
 import com.example.json_placeholder_app.presentation.viewmodel.action.CreateAlbumAction
 import com.example.json_placeholder_app.presentation.viewmodel.state.CreateAlbumState
 import kotlinx.coroutines.launch

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.ItemPostBinding
-import com.example.json_placeholder_app.domain.entity.PostEntity
+import com.example.domain.entity.PostEntity
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnCommentClickListener
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
 

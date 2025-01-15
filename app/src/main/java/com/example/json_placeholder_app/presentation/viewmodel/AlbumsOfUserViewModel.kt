@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.json_placeholder_app.domain.entity.AlbumEntity
-import com.example.json_placeholder_app.domain.usecase.GetAlbumsByUserIdUseCase
+import com.example.domain.entity.AlbumEntity
+import com.example.domain.usecase.GetAlbumsByUserIdUseCase
 import com.example.json_placeholder_app.presentation.viewmodel.action.AlbumsOfUserAction
 import com.example.json_placeholder_app.presentation.viewmodel.state.AlbumsOfUserState
 import kotlinx.coroutines.launch

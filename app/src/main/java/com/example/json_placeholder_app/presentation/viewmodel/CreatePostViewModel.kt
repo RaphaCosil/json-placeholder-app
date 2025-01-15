@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.json_placeholder_app.domain.entity.PostEntity
-import com.example.json_placeholder_app.domain.usecase.CreatePostUseCase
+import com.example.domain.entity.PostEntity
+import com.example.domain.usecase.CreatePostUseCase
 import com.example.json_placeholder_app.presentation.viewmodel.action.CreatePostAction
 import com.example.json_placeholder_app.presentation.viewmodel.state.CreatePostState
 import kotlinx.coroutines.launch

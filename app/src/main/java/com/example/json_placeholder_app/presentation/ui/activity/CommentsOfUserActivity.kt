@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.json_placeholder_app.databinding.ActivityCommentsOfUserBinding
-import com.example.json_placeholder_app.domain.entity.CommentEntity
+import com.example.domain.entity.CommentEntity
 import com.example.json_placeholder_app.presentation.ui.view.adapter.CommentListAdapter
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration
 import com.example.json_placeholder_app.presentation.viewmodel.CommentsOfUserViewModel

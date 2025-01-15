@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.ItemAlbumBinding
-import com.example.json_placeholder_app.domain.entity.AlbumEntity
+import com.example.domain.entity.AlbumEntity
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration
 

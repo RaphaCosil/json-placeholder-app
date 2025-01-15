@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.json_placeholder_app.domain.entity.CommentEntity
-import com.example.json_placeholder_app.domain.usecase.GetPostCommentsUseCase
+import com.example.domain.entity.CommentEntity
+import com.example.domain.usecase.GetPostCommentsUseCase
 import com.example.json_placeholder_app.presentation.viewmodel.action.CommentsOfUserAction
 import com.example.json_placeholder_app.presentation.viewmodel.state.CommentsOfUserState
 import kotlinx.coroutines.launch

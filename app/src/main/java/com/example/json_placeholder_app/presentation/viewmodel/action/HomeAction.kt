@@ -1,6 +1,6 @@
 package com.example.json_placeholder_app.presentation.viewmodel.action
 
-import com.example.json_placeholder_app.domain.entity.FeedItemEntity
+import com.example.domain.entity.FeedItemEntity
 
 sealed class HomeAction {
     data object LoadData : HomeAction()

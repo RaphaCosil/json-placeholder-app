@@ -1,6 +1,6 @@
 package com.example.json_placeholder_app.presentation.viewmodel.action
 
-import com.example.json_placeholder_app.domain.entity.CommentEntity
+import com.example.domain.entity.CommentEntity
 
 sealed class CommentsOfUserAction {
     data class LoadComments(val userId: Int): CommentsOfUserAction()

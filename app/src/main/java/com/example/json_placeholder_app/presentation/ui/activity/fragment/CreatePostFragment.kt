@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.json_placeholder_app.databinding.FragmentCreatePostBinding
-import com.example.json_placeholder_app.domain.entity.PostEntity
+import com.example.domain.entity.PostEntity
 import com.example.json_placeholder_app.presentation.viewmodel.CreatePostViewModel
 import com.example.json_placeholder_app.presentation.viewmodel.action.CreatePostAction
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.ItemCommentBinding
-import com.example.json_placeholder_app.domain.entity.CommentEntity
+import com.example.domain.entity.CommentEntity
 
 class CommentListAdapter(
     private val commentList: List<CommentEntity>

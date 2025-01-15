@@ -1,7 +1,7 @@
 package com.example.json_placeholder_app.presentation.viewmodel.action
 
-import com.example.json_placeholder_app.domain.entity.AlbumEntity
-import com.example.json_placeholder_app.domain.entity.PhotoEntity
+import com.example.domain.entity.AlbumEntity
+import com.example.domain.entity.PhotoEntity
 
 sealed class CreateAlbumAction {
     data object LoadPhotos : CreateAlbumAction()

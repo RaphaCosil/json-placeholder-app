@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.ItemUserBinding
-import com.example.json_placeholder_app.domain.entity.UserEntity
+import com.example.domain.entity.UserEntity
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserItemClickListener
 
 class UserListAdapter(

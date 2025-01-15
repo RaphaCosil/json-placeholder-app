@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.json_placeholder_app.databinding.FragmentPostsOfUserBinding
-import com.example.json_placeholder_app.domain.entity.PostEntity
+import com.example.domain.entity.PostEntity
 import com.example.json_placeholder_app.presentation.ui.activity.CommentsOfUserActivity
 import com.example.json_placeholder_app.presentation.ui.view.adapter.PostListAdapter
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnCommentClickListener

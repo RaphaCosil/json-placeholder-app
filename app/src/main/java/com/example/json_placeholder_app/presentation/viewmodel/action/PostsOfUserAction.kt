@@ -1,6 +1,6 @@
 package com.example.json_placeholder_app.presentation.viewmodel.action
 
-import com.example.json_placeholder_app.domain.entity.PostEntity
+import com.example.domain.entity.PostEntity
 
 sealed class PostsOfUserAction {
     data class LoadPosts(val userId: Int): PostsOfUserAction()

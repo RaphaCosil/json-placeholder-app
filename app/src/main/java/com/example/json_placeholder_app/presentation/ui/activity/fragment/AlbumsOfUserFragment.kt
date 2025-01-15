@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.json_placeholder_app.databinding.FragmentAlbumsOfUserBinding
-import com.example.json_placeholder_app.domain.entity.AlbumEntity
+import com.example.domain.entity.AlbumEntity
 import com.example.json_placeholder_app.presentation.ui.view.adapter.AlbumListAdapter
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration

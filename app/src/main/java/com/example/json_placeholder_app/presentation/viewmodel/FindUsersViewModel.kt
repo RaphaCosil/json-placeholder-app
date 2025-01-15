@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.json_placeholder_app.domain.entity.UserEntity
-import com.example.json_placeholder_app.domain.usecase.GetAllUsersUseCase
+import com.example.domain.entity.UserEntity
+import com.example.domain.usecase.GetAllUsersUseCase
 import com.example.json_placeholder_app.presentation.viewmodel.action.FindUsersAction
 import com.example.json_placeholder_app.presentation.viewmodel.state.FindUsersState
 import kotlinx.coroutines.launch

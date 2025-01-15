@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.ItemPhotoBinding
-import com.example.json_placeholder_app.domain.entity.PhotoEntity
+import com.example.domain.entity.PhotoEntity
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnPhotoClickListener
 
 class PhotoListAdapter(

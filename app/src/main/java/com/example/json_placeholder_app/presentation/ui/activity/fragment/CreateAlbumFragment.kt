@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.json_placeholder_app.databinding.FragmentCreateAlbumBinding
-import com.example.json_placeholder_app.domain.entity.AlbumEntity
-import com.example.json_placeholder_app.domain.entity.PhotoEntity
+import com.example.domain.entity.AlbumEntity
+import com.example.domain.entity.PhotoEntity
 import com.example.json_placeholder_app.presentation.ui.view.adapter.PhotoListAdapter
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnPhotoClickListener
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration

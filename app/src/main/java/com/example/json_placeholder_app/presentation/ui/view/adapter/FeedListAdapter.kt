@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.ItemAlbumBinding
 import com.example.json_placeholder_app.databinding.ItemPostBinding
-import com.example.json_placeholder_app.domain.entity.AlbumEntity
-import com.example.json_placeholder_app.domain.entity.FeedItemEntity
-import com.example.json_placeholder_app.domain.entity.PostEntity
+import com.example.domain.entity.AlbumEntity
+import com.example.domain.entity.FeedItemEntity
+import com.example.domain.entity.PostEntity
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnCommentClickListener
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnUserInformationClickListener
 import com.example.json_placeholder_app.presentation.ui.view.style.SpaceItemDecoration

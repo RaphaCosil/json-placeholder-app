@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.json_placeholder_app.R
 import com.example.json_placeholder_app.databinding.FragmentHomeBinding
-import com.example.json_placeholder_app.domain.entity.FeedItemEntity
+import com.example.domain.entity.FeedItemEntity
 import com.example.json_placeholder_app.presentation.ui.activity.CommentsOfUserActivity
 import com.example.json_placeholder_app.presentation.ui.view.adapter.FeedListAdapter
 import com.example.json_placeholder_app.presentation.ui.view.click_listener.OnCommentClickListener

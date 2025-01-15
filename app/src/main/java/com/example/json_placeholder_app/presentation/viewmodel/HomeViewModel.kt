@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.json_placeholder_app.domain.entity.FeedItemEntity
-import com.example.json_placeholder_app.domain.usecase.GetFeedListUseCase
+import com.example.domain.entity.FeedItemEntity
+import com.example.domain.usecase.GetFeedListUseCase
 import com.example.json_placeholder_app.presentation.utils.FeedItemEntityDeserializer
 import com.example.json_placeholder_app.presentation.viewmodel.action.HomeAction
 import com.example.json_placeholder_app.presentation.viewmodel.state.HomeState

@@ -1,6 +1,6 @@
 package com.example.json_placeholder_app.presentation.viewmodel.action
 
-import com.example.json_placeholder_app.domain.entity.UserEntity
+import com.example.domain.entity.UserEntity
 
 sealed class UserProfileAction {
     data class LoadUserProfile(val userId: Int): UserProfileAction()

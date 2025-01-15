@@ -1,6 +1,6 @@
 package com.example.json_placeholder_app.presentation.viewmodel.state
 
-import com.example.json_placeholder_app.domain.entity.UserEntity
+import com.example.domain.entity.UserEntity
 
 data class UserProfileState (
     val isLoading: Boolean = false,

@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "json-placeholder-app"
 include(":app")
- 
+include(":app:domain")
+include(":app:data")

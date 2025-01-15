@@ -1,8 +1,8 @@
 package com.example.json_placeholder_app.presentation.utils
 
-import com.example.json_placeholder_app.domain.entity.AlbumEntity
-import com.example.json_placeholder_app.domain.entity.FeedItemEntity
-import com.example.json_placeholder_app.domain.entity.PostEntity
+import com.example.domain.entity.AlbumEntity
+import com.example.domain.entity.FeedItemEntity
+import com.example.domain.entity.PostEntity
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement

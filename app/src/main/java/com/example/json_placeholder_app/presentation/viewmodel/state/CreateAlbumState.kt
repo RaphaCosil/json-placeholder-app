@@ -1,7 +1,7 @@
 package com.example.json_placeholder_app.presentation.viewmodel.state
 
-import com.example.json_placeholder_app.domain.entity.AlbumEntity
-import com.example.json_placeholder_app.domain.entity.PhotoEntity
+import com.example.domain.entity.AlbumEntity
+import com.example.domain.entity.PhotoEntity
 
 data class CreateAlbumState(
     val isLoading: Boolean = false,
