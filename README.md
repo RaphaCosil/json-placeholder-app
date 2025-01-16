@@ -6,7 +6,7 @@ This is a mobile application built using Android with an emphasis on modular arc
 
 The app simulates a social network, managing albums, posts, and user interactions using various endpoints from the [JSONPlaceholder](https://jsonplaceholder.typicode.com/) API. 
 
-The project serves as a template for applying architectural principles in other projects.
+The project serves as a model for applying architectural principles to more complex projects.
 
 Key features include:
 
