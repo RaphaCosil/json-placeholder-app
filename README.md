@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-This is a mobile application built using Android with an emphasis on modular architecture, leveraging the MVVM (Model-View-ViewModel) design pattern. 
+This is a mobile application built using Android with an emphasis on modular architecture, leveraging the MVVM (Model-View-ViewModel) design pattern.
 
-The app simulates a social network, managing albums, posts, and user interactions using various endpoints from the [JSONPlaceholder](https://jsonplaceholder.typicode.com/) API. 
+The app simulates a social network, managing albums, posts, and user interactions using various endpoints from the [JSONPlaceholder](https://jsonplaceholder.typicode.com/) API.
 
 The project serves as a model for applying architectural principles to more complex projects.
 
@@ -26,59 +26,65 @@ The project follows Clean Architecture, organized into three key layers:
 
 ### 1. Presentation Layer (app module)
 
-This layer handles the UI components, including activities, fragments, and ViewModels. 
+This layer handles the UI components, including activities, fragments, views, adapters, and ViewModels.
 
-It communicates with the Domain Layer to fetch and update data. 
+It communicates with the Domain Layer to fetch and update data.
 
 The ViewModel observes states and updates the UI accordingly.
 
-- UI (Activities & Fragments):
+- **UI (Activities & Fragments)**:
     
     Displays user-facing elements such as lists, forms, and navigation.
     
-- ViewModels:
+- **Views**:
+    
+    Includes adapters for RecyclerView, click listeners, and custom UI components.
+    
+- **ViewModels**:
     
     Manages UI state and interacts with UseCases from the Domain Layer.
     
-- Utilities:
+    Includes action and state management.
+    
+- **Utilities**:
     
     Helper classes for UI enhancements like RecyclerView decorations or utility functions.
     
 
 ### 2. Domain Layer (domain module)
 
-This layer defines the business logic and use cases. 
+This layer defines the business logic and use cases.
 
 It abstracts the application rules and interacts with repositories in the Data Layer.
 
-- Entities:
+- **Entities**:
     
     Business objects representing core data.
     
-- UseCases:
+- **UseCases**:
     
     Define application-specific operations (e.g., fetching posts, creating albums).
     
-- Repositories (Interfaces):
+- **Repositories (Interfaces)**:
     
     Abstracts data sources, ensuring the Domain Layer doesn't depend directly on the Data Layer.
     
 
 ### 3. Data Layer (data module)
 
-This layer is responsible for data management. 
+This layer is responsible for data management.
 
 It connects with APIs and transforms data into domain entities.
 
-- DataSource:
+- **DataSource**:
     
     Contains the Retrofit service interface for API calls.
     
-- Models:
+- **Models**:
     
-    Data Transfer Objects (DTOs) used for serialization, deserialization and transformation of the DTOs to Entity.
+    Data Transfer Objects (DTOs) used for serialization, deserialization, and transformation of DTOs to Entities.
     
-- Repository Implementation:
+- **Repository Implementation**:
     
     Implements the repository interfaces and handles data transformations.
     
@@ -88,28 +94,43 @@ It connects with APIs and transforms data into domain entities.
 ## Project Structure
 
 ```
-├── app
-|   └── src/main/java/com/example/json_placeholder_app/presentation
-|       ├── ui
-|       │   ├── activity
-|       │   ├── fragment
-|       │   ├── view
-|       │   ├── utils
-|       └── viewmodel
-|           └── state
-|           └── action
-|
-├── data
-|   └── src/main/java/com/example/data
-|       ├── datasource
-|       ├── model
-|       └── repository
-|
-└── domain
-    └── src/main/java/com/example/domain
-        ├── entity
-        ├── repository
-        └── usecase
+data
+│── manifests
+│── java
+│   └── com.example.data
+│       ├── datasource
+│       ├── model
+│       ├── repository
+│── com.example.data (androidTest)
+│── com.example.data (test)
+
+domain
+│── main
+│   │── java
+│   │   └── com.example.domain
+│   │       ├── entity
+│   │       ├── repository
+│   │       ├── usecase
+│── test
+│── manifests
+
+java
+│── com.example.json_placeholder_api
+│   ├── presentation
+│   │   ├── ui
+│   │   │   ├── activity
+│   │   │   ├── fragment
+│   │   │   ├── view
+│   │   │   │   ├── adapter
+│   │   │   │   ├── click_listener
+│   │   ├── utils
+│   │   ├── viewmodel
+│   │   │   ├── action
+│   │   │   ├── state
+│   ├── Application
+│   ├── KoinApplication.kt
+│── com.example.json_placeholder_api (generated)
+
 ```
 
 ---
@@ -118,30 +139,30 @@ It connects with APIs and transforms data into domain entities.
 
 ### User Interaction
 
-- FindUsersFragment: Lists all users and navigates to a specific user’s profile.
-- HomeFragment: Displays the main feed (e.g., posts, albums).
+- **FindUsersFragment**: Lists all users and navigates to a specific user’s profile.
+- **HomeFragment**: Displays the main feed (e.g., posts, albums).
 
 ### Albums Management
 
-- AlbumsOfUserFragment: Displays a list of albums for a user.
-- CreateAlbumFragment: Allows users to create albums with titles and up to two photos.
+- **AlbumsOfUserFragment**: Displays a list of albums for a user.
+- **CreateAlbumFragment**: Allows users to create albums with titles and up to two photos.
 
 ### Post Management
 
-- CreatePostFragment: Enables users to create posts with a title and description.
+- **CreatePostFragment**: Enables users to create posts with a title and description.
 
 ### Publication Management
 
-- CreatePublicationFragment: Manages switching between creating posts and albums.
+- **CreatePublicationFragment**: Manages switching between creating posts and albums.
 
 ---
 
 ## Tech Stack
 
-- Programming Language: Kotlin
-- Architecture: MVVM with Clean Architecture
-- Networking: [Retrofit](https://square.github.io/retrofit/) + [Gson](https://github.com/google/gson)
-- Dependency Injection: [Koin](https://insert--koin-io.translate.goog/?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=pt&_x_tr_pto=tc)
-- State Management: LiveData
-- UI Components: RecyclerView, Fragments, ViewBinding
-- API: [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
+- **Programming Language**: Kotlin
+- **Architecture**: MVVM with Clean Architecture
+- **Networking**: [Retrofit](https://square.github.io/retrofit/) + [Gson](https://github.com/google/gson)
+- **Dependency Injection**: [Koin](https://insert--koin-io.translate.goog/?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=pt&_x_tr_pto=tc)
+- **State Management**: LiveData
+- **UI Components**: RecyclerView, Fragments, ViewBinding
+- **API**: [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
